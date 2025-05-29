@@ -1,7 +1,6 @@
 variable "cidr_block" {
-  description = "cidr of vpc"
+  description = "cidr of vpc - required"
   type        = string
-  default     = "10.0.0.0/24"
 }
 
 variable "vpc_tags" {
