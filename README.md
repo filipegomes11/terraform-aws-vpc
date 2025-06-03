@@ -20,7 +20,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-
 #main.tf
 
 module "vpc" {
@@ -64,9 +63,6 @@ variable "enable_dns_hostnames" {
 | enable\_dns\_hostnames | Enable DNS hostnames in the VPC | `bool` | `true` | no |
 | enable\_dns\_support | Enable DNS support in the VPC | `bool` | `true` | no |
 | vpc\_tags | n/a | `map(string)` | <pre>{<br/>  "Name": "change-me"<br/>}</pre> | no |
-## Modules
-
-No modules.
 ## Outputs
 
 | Name | Description |
