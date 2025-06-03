@@ -1,25 +1,14 @@
-resource "aws_subnet" "public_subnet_1a" {
+resource "aws_subnet" "public" {
+  for_each                = local.public_subnets
   vpc_id                  = aws_vpc.this.id
-  cidr_block              = cidrsubnet(var.cidr_block, 3, 0)
-  availability_zone       = "${data.aws_region.current.name}a"
-  tags                    = merge(local.tags, { Name = "public-subnet-1a" })
+  cidr_block              = cidrsubnet(var.cidr_block, 3, each.value.cidr_sufix)
+  availability_zone       = each.value.az
   map_public_ip_on_launch = true
+  tags                    = merge(local.tags, { Name = "public-subnet-${each.key}" })
 }
 
-resource "aws_subnet" "public_subnet_1b" {
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = cidrsubnet(var.cidr_block, 3, 1)
-  availability_zone       = "${data.aws_region.current.name}b"
-  map_public_ip_on_launch = true
-  tags                    = merge(local.tags, { Name = "public-subnet-1b" })
-}
-
-resource "aws_route_table_association" "public_route_table_association_pub_1a" {
-  subnet_id      = aws_subnet.public_subnet_1a.id
-  route_table_id = aws_route_table.public_route_table.id
-}
-
-resource "aws_route_table_association" "public_route_table_association_pub_1b" {
-  subnet_id      = aws_subnet.public_subnet_1b.id
+resource "aws_route_table_association" "public" {
+  for_each       = local.public_subnets
+  subnet_id      = aws_subnet.public[each.key].id
   route_table_id = aws_route_table.public_route_table.id
 }

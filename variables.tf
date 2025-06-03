@@ -21,3 +21,8 @@ variable "enable_dns_hostnames" {
   description = "Enable DNS hostnames in the VPC"
   default     = true
 }
+
+variable "availability_zones" {
+  type    = list(string)
+  default = ["a", "b"]
+}
