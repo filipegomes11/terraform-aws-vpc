@@ -22,6 +22,12 @@ module "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   vpc_tags             = var.vpc_tags
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb" = "1"
+  }
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = "1"
+  }
 }
 
 #variables.tf

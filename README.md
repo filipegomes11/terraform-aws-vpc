@@ -28,6 +28,12 @@ module "vpc" {
   enable_dns_support   = var.enable_dns_support
   enable_dns_hostnames = var.enable_dns_hostnames
   vpc_tags             = var.vpc_tags
+  private_subnet_tags = {
+    "kubernetes.io/role/internal-elb" = "1"
+  }
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = "1"
+  }
 }
 
 #variables.tf
@@ -62,6 +68,8 @@ variable "enable_dns_hostnames" {
 | cidr\_block | cidr of vpc - required | `string` | n/a | yes |
 | enable\_dns\_hostnames | Enable DNS hostnames in the VPC | `bool` | `true` | no |
 | enable\_dns\_support | Enable DNS support in the VPC | `bool` | `true` | no |
+| private\_subnet\_tags | Private subnet additional tags | `map(string)` | `{}` | no |
+| public\_subnet\_tags | Public subnet additional tags | `map(string)` | `{}` | no |
 | vpc\_tags | n/a | `map(string)` | <pre>{<br/>  "Name": "change-me"<br/>}</pre> | no |
 ## Outputs
 

@@ -4,7 +4,8 @@ resource "aws_subnet" "public" {
   cidr_block              = cidrsubnet(var.cidr_block, 3, each.value.cidr_sufix)
   availability_zone       = each.value.az
   map_public_ip_on_launch = true
-  tags                    = merge(local.tags, { Name = "public-subnet-${each.key}" })
+  tags                    = merge(local.tags, var.public_subnet_tags, { Name = "public-subnet-${each.key}" })
+
 }
 
 resource "aws_route_table_association" "public" {

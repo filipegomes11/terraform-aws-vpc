@@ -3,7 +3,7 @@ resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.this.id
   cidr_block        = cidrsubnet(var.cidr_block, 3, each.value.cidr_sufix)
   availability_zone = each.value.az
-  tags              = merge(local.tags, { Name = "private-subnet-${each.key}" })
+  tags              = merge(local.tags, var.private_subnet_tags, { Name = "private-subnet-${each.key}" })
 }
 
 resource "aws_route_table_association" "private" {
