@@ -1,3 +1,6 @@
+[![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-5C4EE5?logo=terraform&style=for-the-badge)](https://registry.terraform.io/modules/filipegomes11/vpc/aws)
+
+
 <!-- BEGIN_TF_DOCS -->
 
 
